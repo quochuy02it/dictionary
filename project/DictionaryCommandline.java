@@ -12,21 +12,24 @@ public class DictionaryCommandline  {
     public FileInputStream fileInputStream;
     public Scanner scanner;
     public static int spaceWord = 15;
+    // khởi tạo đối tượng đọc file 
     public DictionaryCommandline(String url) throws FileNotFoundException {
         this.url = url;
         this.fileInputStream = new FileInputStream(url);
         this.scanner = new Scanner(fileInputStream);
     }
-
+    
     public void showAllWords() throws IOException {
         String arr[] = new String[1000];
         int currentSize = 0;
+        //đọc file và lưu vào mảng arr 
         while (scanner.hasNextLine()) {
             arr[currentSize] = scanner.nextLine();
             currentSize++;
         }
         scanner.close();
         fileInputStream.close();
+        // tách lấy phần tiếng anh và tiếng việt
         for(int i = 0; i < currentSize; i++ ) {
             String english = "";
             String vietnameese = "";
@@ -37,6 +40,9 @@ public class DictionaryCommandline  {
                     break;
                 }
             }
+            // tạo khoảng cách để hiện thị hai giữa hai chữ tiêng anh và tiếng việt
+            // nếu độ dài chữ tiếng anh nhỏ hơn thuộc tính spaceWord thì gán độ dài khoảng cách là spaceWord
+            // nếu không thì độ dài khoảng cách là độ dài chữ + 3 
             int space = DictionaryCommandline.spaceWord;
             if(space < english.length()) {
                 space = english.length() + 3;
